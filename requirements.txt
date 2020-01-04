@@ -1,0 +1,7 @@
+torch
+torchvision
+numpy
+matplotlib
+gym
+box2d-py
+atari-py
