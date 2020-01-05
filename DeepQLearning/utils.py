@@ -34,7 +34,7 @@ class RepeatActionAndMaxFrame(gym.Wrapper):
     def __init__(self, env=None, repeat=4, clip_reward=False, no_ops=0, fire_first=False):
         super(RepeatActionAndMaxFrame, self).__init__(env)
         self.repeat = repeat
-        self.shape = env.observation_space.low_shape
+        self.shape = env.observation_space.low.shape
         self.frame_buffer = np.zeros_like((2, self.shape))
         self.clip_reward = clip_reward
         self.no_ops = no_ops
@@ -81,8 +81,8 @@ class PreprocessFrame(gym.ObservationWrapper):
     def observation(self, obs):
         new_frame = cv2.cvtColor(obs, cv2.COLOR_RGB2GRAY)
         resized_screen = cv2.resize(new_frame, self.shape[1:], interpolation=cv2.INTER_AREA)
-        new_obs = np.array(resized_screen, dtype=np.uint8).reshape(self.shape)
-        new_obs /= 255.0
+        new_obs = np.array(resized_screen, dtype=np.bool).reshape(self.shape)
+        new_obs = new_obs / 255.0
 
         return new_obs
 
