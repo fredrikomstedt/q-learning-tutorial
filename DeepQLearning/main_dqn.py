@@ -6,8 +6,8 @@ if __name__ == "__main__":
     env = make_env('PongNoFrameskip-v4')
     best_score = -np.inf
     load_checkpoint = False
-    n_games = 500
-    agent = DQNAgent(gamma=0.99, epsilon=1.0, lr=0.0001, input_dims=env.observation_space.shape, n_actions=env.action_space.n, mem_size=20000, eps_min=0.1, batch_size=32, replace=1000, eps_dec=1e-5, chkpt_dir='models/', algo='DQNAgent', env_name='PongNoFrameskip-v4')
+    n_games = 200
+    agent = DQNAgent(gamma=0.99, epsilon=1.0, lr=0.0001, input_dims=(env.observation_space.shape), n_actions=env.action_space.n, mem_size=20000, eps_min=0.1, batch_size=32, replace=1000, eps_dec=1e-5, chkpt_dir='models/', algo='DQNAgent', env_name='PongNoFrameskip-v4')
     
     if load_checkpoint:
         agent.load_models()
