@@ -11,11 +11,14 @@ agent = Agent(alpha=0.000025, beta=0.00025, input_dims=[8], tau=0.001, env=env,
 np.random.seed(0)
 
 score_history = []
-for i in range(1000):
+n_games = 1000
+for i in range(n_games):
     done = False
     score = 0
     obs = env.reset()
     while not done:
+        if float(i) / n_games >= 0.99:
+            env.render()
         action = agent.choose_action(obs)
         new_state, reward, done, info = env.step(action)
         agent.remember(obs, action, reward, new_state, int(done))
@@ -31,4 +34,4 @@ for i in range(1000):
         agent.save_models()
 
 filename = 'lunar-lander.png'
-# TODO: plot function
+plot_learning_curve(n_games, score_history, filename)
